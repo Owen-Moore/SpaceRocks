@@ -21,12 +21,19 @@ namespace SpaceRocks
 
         int shipspeed = 6;
 
+        int spacerockX = 25;
+        int spacerockY = 25;
+        int spacerockW = 80;
+        int spacerockH = 80;
+
+        int rockXSpeed = 5;
+        int rockYSpeed = -5;
+
         bool wDown = false;
         bool sDown = false;
-        
         bool aDown = false;
         bool dDown = false;
-        
+
         Pen mypen = new Pen(Color.White);
         SolidBrush whiteBrush = new SolidBrush(Color.White);
         public Form1()
@@ -71,28 +78,56 @@ namespace SpaceRocks
                 case Keys.A:
                     aDown = false;
                     break;
-               
+
             }
 
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
+            spacerockX += rockXSpeed;
+            spacerockY += rockYSpeed;
+
             if (wDown == true && shipy > 0)
             {
                 shipy -= shipspeed;
+
             }
 
             if (sDown == true && shipy < this.Height - shipheight)
             {
                 shipy += shipspeed;
+
             }
+            if (aDown == true && shipx > 0)
+            {
+                shipx -= shipspeed;
+
+            }
+
+            if (dDown == true && shipy < this.Width - shipheight)
+            {
+                shipx += shipspeed;
+
+            }
+
+            if (spacerockY < 0 || spacerockY > this.Height - spacerockH)
+            {
+                rockYSpeed *= -1;  
+            }
+            if (spacerockX < 0 || spacerockX > this.Width - spacerockW)
+            {
+                rockXSpeed *= -1;
+            }
+
+            
             Refresh();
         }
 
         private void Form1_Paint_1(object sender, PaintEventArgs e)
         {
-            
+
             e.Graphics.DrawPie(mypen, shipx, shipy, 50, 50, shipangle, 45);
+            e.Graphics.DrawEllipse(mypen, spacerockX, spacerockY, spacerockW, spacerockH);
         }
     }
 }
