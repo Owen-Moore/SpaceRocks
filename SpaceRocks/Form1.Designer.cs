@@ -31,6 +31,7 @@ namespace SpaceRocks
         {
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.youloseText = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // timer1
@@ -39,12 +40,25 @@ namespace SpaceRocks
             this.timer1.Interval = 20;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // youloseText
+            // 
+            this.youloseText.BackColor = System.Drawing.Color.Transparent;
+            this.youloseText.Font = new System.Drawing.Font("Consolas", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.youloseText.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.youloseText.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.youloseText.Location = new System.Drawing.Point(2, 0);
+            this.youloseText.Name = "youloseText";
+            this.youloseText.Size = new System.Drawing.Size(798, 449);
+            this.youloseText.TabIndex = 0;
+            this.youloseText.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.youloseText);
             this.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.Name = "Form1";
             this.Text = "Form1";
@@ -58,6 +72,7 @@ namespace SpaceRocks
         #endregion
 
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label youloseText;
     }
 }
 
