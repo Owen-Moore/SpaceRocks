@@ -17,26 +17,27 @@ namespace SpaceRocks
         int shipy = 260;
         int shipangle = 150;
         int shipheight = 50;
-        int shipwidth = 50;
         int shipspeed = 6;
         int shipHBX = 217;
         int shipHBY = 280;
         int shipHBW = 25;
         int shipHBH = 20;
 
-        int spacerockX = 25;
-        int spacerockY = 25;
-        int spacerockW = 80;
-        int spacerockH = 80;
+        List<int> rockSizeList = new List<int>();
+        List<int> rockYList = new List<int>();
+        List<int> rockXList = new List<int>();
+        List<int> rockXSpeedList = new List<int>();
+        List<int> rockYSpeedList = new List<int>();
+        Random randGen = new Random();
+        int randValue = 0;
 
-        int rockXSpeed = 5;
-        int rockYSpeed = -5;
-
+        int counter = 1;
+        int wave = 1;
         bool wDown = false;
         bool sDown = false;
         bool aDown = false;
         bool dDown = false;
-
+       
         Pen testpen = new Pen(Color.Red);
         Pen mypen = new Pen(Color.White);
         SolidBrush whiteBrush = new SolidBrush(Color.White);
@@ -86,11 +87,39 @@ namespace SpaceRocks
             }
 
         }
-        private void timer1_Tick(object sender, EventArgs e)
+      
+            private void timer1_Tick(object sender, EventArgs e)
         {
-            spacerockX += rockXSpeed;
-            spacerockY += rockYSpeed;
 
+            randValue = randGen.Next(0, 1000);
+
+            if (randValue < 10)
+            {
+                rockSizeList.Add(80);
+                rockXList.Add(randGen.Next(1, 2400));
+                rockYList.Add(randGen.Next(1, 601));
+                rockXSpeedList.Add(randGen.Next(4, 6));
+                rockYSpeedList.Add(randGen.Next(4, 6));
+            }
+            else if (randValue > 990)
+            {
+                rockSizeList.Add(40);
+                rockXList.Add(randGen.Next(1, 2400));
+                rockYList.Add(randGen.Next(1, 601));
+                rockXSpeedList.Add(randGen.Next(4, 10));
+                rockYSpeedList.Add(randGen.Next(4, 6));
+            }
+
+            for (int i = 0; i < rockXList.Count(); i++)
+            {
+                rockXList[i] += rockXSpeedList[i];
+                
+            }
+            for (int i = 0; i < rockYList.Count(); i++)
+            {
+                rockYList[i] += rockYSpeedList[i];
+                
+            }
             if (wDown == true && shipy > 0)
             {
                 shipy -= shipspeed;
@@ -114,29 +143,69 @@ namespace SpaceRocks
                 shipHBX += shipspeed;
             }
 
-            if (spacerockY < 0 || spacerockY > this.Height - spacerockH)
+            for (int i = 0; i < rockYList.Count(); i++)
             {
-                rockYSpeed *= -1;  
+                if (rockYList[i] > this.Height - rockSizeList[i] || rockYList[i] < 0)
+                {
+                    rockYSpeedList[i] *= -1;
+                }
+                if (rockXList[i] > this.Width - rockSizeList[i]|| rockXList[i] < 0)
+                {
+                    rockXSpeedList[i] *= -1;
+                }
             }
-            if (spacerockX < 0 || spacerockX > this.Width - spacerockW)
+            for (int i = 0; i < rockXList.Count(); i++)
             {
-                rockXSpeed *= -1;
+                Rectangle RockRec = new Rectangle(rockXList[i], rockYList[i], rockSizeList[i], rockSizeList[i]);
+                Rectangle shipHB = new Rectangle(shipHBX, shipHBY, shipHBW, shipHBH);
+
+                if (shipHB.IntersectsWith(RockRec))
+                {
+                    this.BackColor = Color.White;
+                    youloseText.ForeColor = Color.Black;
+                    youloseText.Text = $"YOU LOSE";
+                }
+                else
+                {
+                    youloseText.Text = $"Space Rocks (entirely different than asteroids)";
+                }
+
             }
-            Rectangle RockRec = new Rectangle(spacerockX, spacerockY, spacerockW, spacerockH);
-            Rectangle shipHB = new Rectangle(shipHBX, shipHBY, shipHBW, shipHBH);
-            if (shipHB.IntersectsWith(RockRec))
-            {
-                this.BackColor = Color.White;
-                youloseText.Text = "YOU LOSE";
-            }
+        
+            counter++;
+            //youloseText.ForeColor = Color.White;
+            //youloseText.Text = $"Wave {Convert.ToString(wave)} {Convert.ToString(counter)}";
             Refresh();
         }
+        private void waveTimer_Tick_1(object sender, EventArgs e)
 
+        {
+            
+
+          
+           // Refresh();
+        }
         private void Form1_Paint_1(object sender, PaintEventArgs e)
         {
-           // e.Graphics.DrawRectangle(testpen, 217, 280, 25, 20);
+            // e.Graphics.DrawRectangle(testpen, 217, 280, 25, 20);
             e.Graphics.DrawPie(mypen, shipx, shipy, 50, 50, shipangle, 45);
-            e.Graphics.DrawEllipse(mypen, spacerockX, spacerockY, spacerockW, spacerockH);
+            for (int i = 0; i < rockXList.Count(); i++)
+            {
+                if (randValue > 1)
+                {
+                    e.Graphics.DrawEllipse(mypen, rockXList[i], rockYList[i], rockSizeList[i], rockSizeList[i]);
+                }
+                else if (randValue < 0)
+                {
+                    e.Graphics.DrawEllipse(mypen, rockXList[i], rockYList[i], rockSizeList[i], rockSizeList[i]);
+                }
+             
+            }
+
+        }
+
+        
+
         }
     }
-}
+
