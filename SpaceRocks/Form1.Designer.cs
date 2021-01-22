@@ -30,6 +30,7 @@ namespace SpaceRocks
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.youloseText = new System.Windows.Forms.Label();
             this.waveTimer = new System.Windows.Forms.Timer(this.components);
@@ -47,29 +48,31 @@ namespace SpaceRocks
             this.youloseText.Font = new System.Drawing.Font("Consolas", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.youloseText.ForeColor = System.Drawing.Color.White;
             this.youloseText.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.youloseText.Location = new System.Drawing.Point(2, 0);
+            this.youloseText.Location = new System.Drawing.Point(1, 0);
+            this.youloseText.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
             this.youloseText.Name = "youloseText";
-            this.youloseText.Size = new System.Drawing.Size(1255, 588);
+            this.youloseText.Size = new System.Drawing.Size(1025, 568);
             this.youloseText.TabIndex = 0;
-            this.youloseText.Text = "Best played with biggest window possible";
             this.youloseText.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // waveTimer
             // 
             this.waveTimer.Enabled = true;
             this.waveTimer.Interval = 1000;
-            this.waveTimer.Tick += new System.EventHandler(this.waveTimer_Tick_1);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(18F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(1730, 910);
+            this.ClientSize = new System.Drawing.Size(1024, 563);
             this.Controls.Add(this.youloseText);
-            this.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.White;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(9);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Space Rocks";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint_1);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown_1);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);

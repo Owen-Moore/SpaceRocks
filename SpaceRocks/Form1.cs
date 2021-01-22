@@ -38,7 +38,7 @@ namespace SpaceRocks
         bool aDown = false;
         bool dDown = false;
        
-        Pen testpen = new Pen(Color.Red);
+        SolidBrush blackBrush = new SolidBrush(Color.Black);
         Pen mypen = new Pen(Color.White);
         SolidBrush whiteBrush = new SolidBrush(Color.White);
         public Form1()
@@ -177,18 +177,12 @@ namespace SpaceRocks
             //youloseText.Text = $"Wave {Convert.ToString(wave)} {Convert.ToString(counter)}";
             Refresh();
         }
-        private void waveTimer_Tick_1(object sender, EventArgs e)
-
-        {
-            
-
-          
-           // Refresh();
-        }
+       
         private void Form1_Paint_1(object sender, PaintEventArgs e)
         {
             // e.Graphics.DrawRectangle(testpen, 217, 280, 25, 20);
             e.Graphics.DrawPie(mypen, shipx, shipy, 50, 50, shipangle, 45);
+            e.Graphics.DrawString("You lose", Font, blackBrush, shipx, shipy);
             for (int i = 0; i < rockXList.Count(); i++)
             {
                 if (randValue > 1)
