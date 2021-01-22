@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+//January 22 2021
+//By Owen Moore
+//like asteroids without shooting, you fly around and try not to get hit.
 namespace SpaceRocks
 {
     public partial class Form1 : Form
@@ -32,15 +34,15 @@ namespace SpaceRocks
         int randValue = 0;
 
         int counter = 1;
-        int wave = 1;
+        
         bool wDown = false;
         bool sDown = false;
         bool aDown = false;
         bool dDown = false;
-       
+
         SolidBrush blackBrush = new SolidBrush(Color.Black);
         Pen mypen = new Pen(Color.White);
-        SolidBrush whiteBrush = new SolidBrush(Color.White);
+        
         public Form1()
         {
             InitializeComponent();
@@ -87,8 +89,8 @@ namespace SpaceRocks
             }
 
         }
-      
-            private void timer1_Tick(object sender, EventArgs e)
+
+        private void timer1_Tick(object sender, EventArgs e)
         {
 
             randValue = randGen.Next(0, 1000);
@@ -113,12 +115,12 @@ namespace SpaceRocks
             for (int i = 0; i < rockXList.Count(); i++)
             {
                 rockXList[i] += rockXSpeedList[i];
-                
+
             }
             for (int i = 0; i < rockYList.Count(); i++)
             {
                 rockYList[i] += rockYSpeedList[i];
-                
+
             }
             if (wDown == true && shipy > 0)
             {
@@ -149,7 +151,7 @@ namespace SpaceRocks
                 {
                     rockYSpeedList[i] *= -1;
                 }
-                if (rockXList[i] > this.Width - rockSizeList[i]|| rockXList[i] < 0)
+                if (rockXList[i] > this.Width - rockSizeList[i] || rockXList[i] < 0)
                 {
                     rockXSpeedList[i] *= -1;
                 }
@@ -171,16 +173,15 @@ namespace SpaceRocks
                 }
 
             }
-        
+
             counter++;
-            //youloseText.ForeColor = Color.White;
-            //youloseText.Text = $"Wave {Convert.ToString(wave)} {Convert.ToString(counter)}";
+            
             Refresh();
         }
-       
+
         private void Form1_Paint_1(object sender, PaintEventArgs e)
         {
-            // e.Graphics.DrawRectangle(testpen, 217, 280, 25, 20);
+            
             e.Graphics.DrawPie(mypen, shipx, shipy, 50, 50, shipangle, 45);
             e.Graphics.DrawString("You lose", Font, blackBrush, shipx, shipy);
             for (int i = 0; i < rockXList.Count(); i++)
@@ -193,13 +194,13 @@ namespace SpaceRocks
                 {
                     e.Graphics.DrawEllipse(mypen, rockXList[i], rockYList[i], rockSizeList[i], rockSizeList[i]);
                 }
-             
+
             }
 
         }
 
-        
 
-        }
+
     }
+}
 
